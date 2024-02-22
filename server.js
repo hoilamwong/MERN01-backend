@@ -1,11 +1,12 @@
 require('dotenv').config()
 
-const express = require('express')
-const app = express()
 const mongoose = require('mongoose')
 const path = require('path')
-const cors = require('cors')
 
+const express = require('express')
+const app = express()
+
+const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
 const connectDB = require('./config/dbConn')
 
@@ -20,6 +21,7 @@ app.use(express.json())
 
 app.use('/', require('./routes/root'))
 app.use('/users', require('./routes/userRoutes'))
+app.use('/activities', require('./routes/activityRoutes'))
 
 app.all('*', (req, res) => {
   res.status(404)
@@ -38,5 +40,5 @@ mongoose.connection.on('open', () => {
 })
 
 mongoose.connection.on('error', err => {
-  console.log(err);
+  console.log(err); 
 })

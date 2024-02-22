@@ -12,11 +12,16 @@ const activitySchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true
   },
-  },{
-    timestamps: true
-  }
-)
+  tags: [{
+    type: String,
+    required: true
+  }],
+  timerType: { type: String, required: true },
+  timerStatus: { type: String, required: true }, // default | running | paused | completed | 
+  timerDuration: { type: Number, required: true }, // default 25 min ( 25 * 60 s *1000 ms)
+  timerStarted: { type: String },
+  timerEnd: { type: Date },
+})
 
 module.exports = mongoose.model('Activity', activitySchema)
